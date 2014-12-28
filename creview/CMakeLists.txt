@@ -1,11 +1,13 @@
-add_compile_options(-std=c++11)
+add_subdirectory(net)
+add_subdirectory(vcs)
 
 add_executable(creview-server
-  main.cpp
+    main.cpp
 )
 
 target_link_libraries(creview-server
-  PocoNet
-  PocoUtil
-  PocoFoundation
+    creview-net
+    creview-vcs
+    PocoNet
+    PocoUtil
 )

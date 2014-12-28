@@ -8,4 +8,6 @@ Makefile
 
 nbproject/
 
+*.a
+*.o
 creview-server
