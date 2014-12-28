@@ -1,3 +1,4 @@
+mkdir -p contrib
 cd contrib
 
 POCO_REV="poco-1.6.0"
@@ -12,9 +13,11 @@ else
     rm -f "$POCO_FILE"
     cd "$POCO_REV"
     ./configure
-    make
+    make -j4
   fi
   echo "POCO installed."
 fi
+
+cmake .
 
 echo "Done."
