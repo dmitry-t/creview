@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 2.8)
 
-project(creview)
+project(hints)
 
 add_compile_options(-std=c++11)
 
 include_directories(.)
 
-add_subdirectory(creview)
+add_subdirectory(hints)

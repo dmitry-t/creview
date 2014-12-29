@@ -1,7 +1,7 @@
-#include "creview/net/request_handler_factory.h"
-#include "creview/net/request_handler.h"
+#include "hints/net/request_handler_factory.h"
+#include "hints/net/request_handler.h"
 
-namespace creview {
+namespace hints {
 namespace net {
 
 Poco::Net::HTTPRequestHandler* RequestHandlerFactory::createRequestHandler(
@@ -12,4 +12,4 @@ Poco::Net::HTTPRequestHandler* RequestHandlerFactory::createRequestHandler(
 }
 
 } // namespace net
-} // namespace creview
+} // namespace hints

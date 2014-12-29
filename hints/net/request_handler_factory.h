@@ -1,12 +1,12 @@
 #pragma once
 
-#include "creview/net/request_handler.h"
+#include "hints/net/request_handler.h"
 
 #include "Poco/Net/HTTPRequestHandler.h"
 #include "Poco/Net/HTTPRequestHandlerFactory.h"
 #include "Poco/Net/HTTPServerRequest.h"
 
-namespace creview {
+namespace hints {
 namespace net {
 
 class RequestHandlerFactory : public Poco::Net::HTTPRequestHandlerFactory
@@ -18,4 +18,4 @@ public:
 };
 
 } // namespace net
-} // namespace creview
+} // namespace hints

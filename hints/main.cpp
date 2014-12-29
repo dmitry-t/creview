@@ -1,4 +1,4 @@
-#include "creview/net/request_handler_factory.h"
+#include "hints/net/request_handler_factory.h"
 
 #include "Poco/Net/HTTPServer.h"
 #include "Poco/Util/ServerApplication.h"
@@ -9,7 +9,7 @@
 
 using Poco::Util::ServerApplication;
 
-namespace creview {
+namespace hints {
 
 class ServerApp : public ServerApplication
 {
@@ -39,10 +39,10 @@ protected:
     }
 };
 
-} // namespace creview
+} // namespace hints
 
 int main(int argc, char* argv[])
 {
-    creview::ServerApp app;
+    hints::ServerApp app;
     return app.run(argc, argv);
 }

@@ -1,8 +1,8 @@
-add_library(creview-net
+add_library(hints-net
     request_handler_factory.cpp
 )
 
-target_link_libraries(creview-net
+target_link_libraries(hints-net
     PocoNet
     PocoUtil
     PocoFoundation

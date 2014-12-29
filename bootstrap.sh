@@ -18,6 +18,12 @@ else
   echo "POCO installed."
 fi
 
+LIBGIT2_FILE="libgit2-master"
+curl "https://codeload.github.com/libgit2/libgit2/zip/master" -o "master.zip"
+unzip master.zip
+rm -f master.zip
+cd "$LIBGIT2_FILE"
 cmake .
+cd ..
 
 echo "Done."

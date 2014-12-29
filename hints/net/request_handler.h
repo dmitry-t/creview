@@ -4,7 +4,7 @@
 #include "Poco/Net/HTTPServerRequest.h"
 #include "Poco/Net/HTTPServerResponse.h"
 
-namespace creview {
+namespace hints {
 namespace net {
 
 class RequestHandler : public Poco::Net::HTTPRequestHandler
@@ -12,8 +12,7 @@ class RequestHandler : public Poco::Net::HTTPRequestHandler
 public:
     virtual void handleRequest(
         Poco::Net::HTTPServerRequest& request,
-        Poco::Net::HTTPServerResponse& response
-        ) override
+        Poco::Net::HTTPServerResponse& response) override
     {
         if (request.getMethod() != "GET")
         {
@@ -34,4 +33,4 @@ public:
 };
 
 } // namespace net
-} // namespace creview
+} // namespace hints
