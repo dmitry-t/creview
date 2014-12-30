@@ -1,6 +1,6 @@
 #pragma once
 
-#include "hints/net/url/segment.h"
+#include "hints/net/url/path.h"
 
 #include <string>
 #include <vector>
@@ -13,9 +13,12 @@ class Mapper {
 public:
     typedef int T;
     void put(const std::string& url, T value);
-    
+    bool get(const std::string& url, T& result) const;
+
 private:
-    Segment root_;
+    const Path* find(const Path& path) const;
+
+    std::vector<Path> paths_;
 };
 
 } // namespace url

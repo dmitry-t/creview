@@ -1,5 +1,7 @@
 #include "hints/net/url/segment.h"
 
+#include <stdexcept>
+
 namespace hints {
 namespace net {
 namespace url {
@@ -7,16 +9,42 @@ namespace url {
 Segment::Segment(std::string value) :
     value_(std::move(value))
 {
+    if (value_.empty())
+    {
+        throw std::logic_error("Empty URL path segment");
+    }
+    if (value_[0] == '{')
+    {
+        if (value_.back() != '}')
+        {
+            throw std::logic_error("Unbalanced curly bracket");
+        }
+        value_.erase(0, 1);
+        value_.erase(value_.size() - 1);
+    }
 }
 
-bool Segment::operator==(const std::string& rhs) const
+bool Segment::matches(const Segment& other) const
 {
-    return value_ == rhs;
+    if (isParam())
+    {
+        return other.isParam();
+    }
+    if (other.isParam())
+    {
+        return false;
+    }
+    return value_ == other.value();
 }
 
-void Segmnent::addNext(Segment segment)
+const std::string& Segment::value() const
 {
-    next_.push_back(std::move(segment));
+    return value_;
+}
+
+bool Segment::isParam() const
+{
+    return value_.empty();
 }
 
 } // namespace url

@@ -1,25 +1,24 @@
 #pragma once
 
 #include <string>
-#include <vector>
 
-namespace hint {
+namespace hints {
 namespace net {
 namespace url {
 
 class Segment
 {
 public:
-    Segment(std::string value);
+    explicit Segment(std::string value);
 
-    bool operator==(const std::string& rhs) const;
-    void addNext(Segment segment);
+    bool matches(const Segment& segment) const;
+    const std::string& value() const;
+    bool isParam() const;
 
 private:
     std::string value_;
-    std::vector<Segment> next_;
 };
 
 } // namespace url
 } // namespace net
-} // namespace hint
+} // namespace hints
