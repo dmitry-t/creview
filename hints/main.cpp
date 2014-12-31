@@ -12,9 +12,14 @@ using Poco::Util::ServerApplication;
 
 namespace hints {
 
-class TestHandler : public net::RequestHandler
+class GetTestHandler : public net::RequestHandler
 {
 public:
+    static const char* method()
+    {
+        return "GET";
+    }
+
     static const char* path()
     {
         return "/test/{id}";
@@ -25,8 +30,29 @@ public:
             net::ServerResponse& response) override
     {
         response.setStatus(net::HTTPStatus::HTTP_OK, "OK")
-                .setContentType("text/plain")
-                .body("ID = " + *request.getPathParam("id"))
+                .setContentType("text/json")
+                .body("{\"id\": \"" + *request.getPathParam("id") + "\"\n")
+                .sendWithEOM();
+    }
+};
+
+class PostTestHandler : public GetTestHandler
+{
+public:
+    static const char* method()
+    {
+        return "POST";
+    }
+
+    virtual void handleRequest(
+            net::ServerRequest& request,
+            net::ServerResponse& response) override
+    {
+        response.setStatus(net::HTTPStatus::HTTP_OK, "OK")
+                .setContentType("text/json")
+                .body(std::string("{\"status\": \"") +
+                        (request.getQueryParam("p") ? "found" : "not found") +
+                        "\"}\n")
                 .sendWithEOM();
     }
 };
@@ -52,7 +78,8 @@ protected:
 	uint16_t port = config().getInt("server.port");
         std::cout << "Listening port " << port << std::endl;
         auto pRegistry = new net::RequestHandlerRegistry;
-        pRegistry->addHandler<TestHandler>();
+        pRegistry->addHandler<GetTestHandler>()
+                .addHandler<PostTestHandler>();
         Poco::Net::HTTPServer server(pRegistry, port);
         server.start();
         waitForTerminationRequest();
