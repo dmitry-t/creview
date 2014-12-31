@@ -11,12 +11,13 @@ class Segment
 public:
     explicit Segment(std::string value);
 
-    bool matches(const Segment& segment) const;
+    bool operator==(const Segment& rhs) const;
     const std::string& value() const;
     bool isParam() const;
 
 private:
     std::string value_;
+    bool isParam_;
 };
 
 } // namespace url

@@ -1,10 +1,15 @@
+#include <algorithm>
+
 #include "hints/net/url/path.h"
+
+#include "Poco/URI.h"
 
 namespace hints {
 namespace net {
 namespace url {
 
-Path::Path(const std::string& url, int value)
+Path::Path(const std::string& url, int value) :
+    value_(value)
 {
     Poco::URI uri(url);
     std::vector<std::string> segmentStrings;
@@ -12,31 +17,21 @@ Path::Path(const std::string& url, int value)
 
     for (auto& segmentString : segmentStrings)
     {
-        segments_.push_back({segmentString});
+        segments_.push_back(Segment(segmentString));
     }
 }
 
-bool Path::matches(const Path& other) const
+bool Path::operator==(const Path& rhs) const
 {
-    if (segments_.size() != other.segments_.size())
-    {
-        return false;
-    }
-    auto i = segments_.begin();
-    for (auto& segment : other.segments_)
-    {
-        if (!i->matches(segment))
-        {
-            return false;
-        }
-        ++i;
-    }
-    return true;
+    return segments_.size() == rhs.segments_.size() && std::equal(
+        segments_.begin(),
+        segments_.end(),
+        rhs.segments_.begin());
 }
 
 int Path::value() const
 {
-
+    return value_;
 }
 
 } // namespace url

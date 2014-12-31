@@ -14,11 +14,12 @@ class Path
 public:
     Path(const std::string& url, int value);
 
-    bool matches(const Path& other) const;
+    bool operator==(const Path& rhs) const;
     int value() const;
 
 private:
     std::vector<Segment> segments_;
+    int value_;
 };
 
 } // namespace url

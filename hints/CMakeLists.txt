@@ -11,3 +11,11 @@ target_link_libraries(hints-server
     PocoNet
     PocoUtil
 )
+
+add_custom_target(hints-tests)
+
+add_custom_command(
+    TARGET hints-tests
+    POST_BUILD
+    COMMAND hints-net-tests
+)

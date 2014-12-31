@@ -32,10 +32,7 @@ bool Mapper::get(const std::string& url, T& result) const
 
 const Path* Mapper::find(const Path& path) const
 {
-    auto i = std::find_if(
-        paths_.begin(),
-        paths_.end(),
-        [&path](const Path& other) { return other.matches(path); });
+    auto i = std::find(paths_.begin(), paths_.end(), path);
     return i != paths_.end() ? &(*i) : nullptr;
 }
 

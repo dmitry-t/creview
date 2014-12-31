@@ -7,7 +7,7 @@ namespace net {
 namespace url {
 
 Segment::Segment(std::string value) :
-    value_(std::move(value))
+    value_(std::move(value)), isParam_(false)
 {
     if (value_.empty())
     {
@@ -21,20 +21,17 @@ Segment::Segment(std::string value) :
         }
         value_.erase(0, 1);
         value_.erase(value_.size() - 1);
+        isParam_ = true;
     }
 }
 
-bool Segment::matches(const Segment& other) const
+bool Segment::operator==(const Segment& rhs) const
 {
-    if (isParam())
+    if (isParam() || rhs.isParam())
     {
-        return other.isParam();
+        return true;
     }
-    if (other.isParam())
-    {
-        return false;
-    }
-    return value_ == other.value();
+    return value_ == rhs.value();
 }
 
 const std::string& Segment::value() const
@@ -44,7 +41,7 @@ const std::string& Segment::value() const
 
 bool Segment::isParam() const
 {
-    return value_.empty();
+    return isParam_;
 }
 
 } // namespace url

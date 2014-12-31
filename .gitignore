@@ -11,3 +11,4 @@ nbproject/
 *.a
 *.o
 hints-server
+/build/
