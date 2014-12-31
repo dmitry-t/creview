@@ -8,7 +8,8 @@ Makefile
 
 nbproject/
 
+*.so
 *.a
 *.o
 hints-server
-/build/
+build/

@@ -1,4 +1,5 @@
-#include "hints/net/request_handler_factory.h"
+#include "hints/net/request_handler_registry.h"
+#include "hints/net/request_handler.h"
 
 #include "Poco/Net/HTTPServer.h"
 #include "Poco/Util/ServerApplication.h"
@@ -10,6 +11,25 @@
 using Poco::Util::ServerApplication;
 
 namespace hints {
+
+class TestHandler : public net::RequestHandler
+{
+public:
+    static const char* path()
+    {
+        return "/test/{id}";
+    }
+
+    virtual void handleRequest(
+            net::ServerRequest& request,
+            net::ServerResponse& response) override
+    {
+        response.setStatus(net::HTTPStatus::HTTP_OK, "OK")
+                .setContentType("text/plain")
+                .body("ID = " + *request.getPathParam("id"))
+                .sendWithEOM();
+    }
+};
 
 class ServerApp : public ServerApplication
 {
@@ -31,7 +51,9 @@ protected:
     {
 	uint16_t port = config().getInt("server.port");
         std::cout << "Listening port " << port << std::endl;
-        Poco::Net::HTTPServer server(new net::RequestHandlerFactory, port);
+        auto pRegistry = new net::RequestHandlerRegistry;
+        pRegistry->addHandler<TestHandler>();
+        Poco::Net::HTTPServer server(pRegistry, port);
         server.start();
         waitForTerminationRequest();
         server.stop();
