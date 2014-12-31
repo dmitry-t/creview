@@ -3,6 +3,7 @@
 #include "hints/net/url/segment.h"
 
 #include <string>
+#include <unordered_map>
 #include <vector>
 
 namespace hints {
@@ -12,14 +13,16 @@ namespace url {
 class Path
 {
 public:
-    Path(const std::string& url, int value);
+    typedef std::unordered_map<std::string, std::string> Params;
+
+    Path(const std::string& url, size_t id);
 
     bool operator==(const Path& rhs) const;
-    int value() const;
+    void extract(Path& concretePath, Params& params, size_t& value) const;
 
 private:
     std::vector<Segment> segments_;
-    int value_;
+    size_t id_;
 };
 
 } // namespace url

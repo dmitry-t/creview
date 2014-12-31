@@ -11,9 +11,10 @@ namespace url {
 
 class Mapper {
 public:
-    typedef int T;
-    void put(const std::string& url, T value);
-    bool get(const std::string& url, T& result) const;
+    typedef Path::Params Params;
+
+    void put(const std::string& url, size_t id);
+    bool get(const std::string& url, Params& params, size_t& id) const;
 
 private:
     const Path* find(const Path& path) const;

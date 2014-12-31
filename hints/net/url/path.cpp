@@ -8,8 +8,8 @@ namespace hints {
 namespace net {
 namespace url {
 
-Path::Path(const std::string& url, int value) :
-    value_(value)
+Path::Path(const std::string& url, size_t id) :
+    id_(id)
 {
     Poco::URI uri(url);
     std::vector<std::string> segmentStrings;
@@ -29,9 +29,21 @@ bool Path::operator==(const Path& rhs) const
         rhs.segments_.begin());
 }
 
-int Path::value() const
+void Path::extract(Path& concretePath, Params& params, size_t& id) const
 {
-    return value_;
+    params.clear();
+    for (size_t i = 0; i < segments_.size(); ++i)
+    {
+        auto& ownSegment = segments_[i];
+        auto& concreteSegment = concretePath.segments_[i];
+        if (ownSegment.isParam())
+        {
+            params.emplace(
+                ownSegment.value(),
+                concreteSegment.value());
+        }
+    }
+    id = id_;
 }
 
 } // namespace url

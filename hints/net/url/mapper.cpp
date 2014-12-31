@@ -9,9 +9,9 @@ namespace hints {
 namespace net {
 namespace url {
 
-void Mapper::put(const std::string& url, T value)
+void Mapper::put(const std::string& url, size_t id)
 {
-    Path path(url, value);
+    Path path(url, id);
     if (find(path))
     {
         throw std::logic_error("Duplicated URL: " + url);
@@ -19,14 +19,15 @@ void Mapper::put(const std::string& url, T value)
     paths_.push_back(std::move(path));
 }
 
-bool Mapper::get(const std::string& url, T& result) const
+bool Mapper::get(const std::string& url, Params& params, size_t& id) const
 {
-    auto pPath = find(Path(url, 0));
+    Path concretePath(url, 0);
+    auto pPath = find(concretePath);
     if (!pPath)
     {
         return false;
     }
-    result = pPath->value();
+    pPath->extract(concretePath, params, id);
     return true;
 }
 
