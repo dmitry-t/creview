@@ -1,8 +1,14 @@
 #include "hints/net/request_handler_registry.h"
 #include "hints/net/request_handler.h"
+#include "hints/timestamp.h"
+#include "ctemplator/Engine.h"
 
+#include "Poco/Dynamic/Var.h"
 #include "Poco/Net/HTTPServer.h"
 #include "Poco/Util/ServerApplication.h"
+#include "contrib/poco-1.6.0/Foundation/include/Poco/Path.h"
+#include "contrib/poco-1.6.0/Foundation/include/Poco/Dynamic/VarHolder.h"
+#include "contrib/poco-1.6.0/Foundation/include/Poco/Dynamic/Struct.h"
 
 #include <iostream>
 #include <vector>
@@ -11,6 +17,8 @@
 using Poco::Util::ServerApplication;
 
 namespace hints {
+
+static ctemplator::Engine templator(".");
 
 class GetTestHandler : public net::RequestHandler
 {
@@ -29,9 +37,13 @@ public:
             net::ServerRequest& request,
             net::ServerResponse& response) override
     {
+        Poco::Dynamic::Var vars = Poco::Dynamic::Struct<std::string>();
+        vars["id"] = *request.getPathParam("id");
+        vars["timestamp"] = Timestamp().epochMicroseconds();
+        auto content = templator.render("templates/sample.tpl", vars);
         response.setStatus(net::HTTPStatus::HTTP_OK, "OK")
-                .setContentType("text/json")
-                .body("{\"id\": \"" + *request.getPathParam("id") + "\"\n")
+                .setContentType("text/plain")
+                .body(content)
                 .sendWithEOM();
     }
 };

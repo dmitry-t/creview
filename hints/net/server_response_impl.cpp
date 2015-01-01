@@ -44,6 +44,7 @@ ServerResponse& ServerResponseImpl::body(const std::string& body)
 ServerResponse& ServerResponseImpl::sendWithEOM()
 {
     response_.send() << body_;
+    return *this;
 }
 
 } // namespace net

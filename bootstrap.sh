@@ -56,4 +56,27 @@ else
   echo "GMock installed."
 fi
 
+CTPP_REV="ctpp2-2.8.3"
+CTPP_FILE="$CTPP_REV.tar.gz"
+if [ -d "$CTPP_REV" ]; then
+  echo "CT++ seems to be already installed."
+else
+  echo "Installing CT++..."
+  curl "http://ctpp.havoc.ru/download/$CTPP_FILE" -o "$CTPP_FILE"
+  if [ -f "$CTPP_FILE" ]; then
+    tar -xvf "$CTPP_FILE"
+    rm -f "$CTPP_FILE"
+    cd "$CTPP_REV"
+    head -n 44 src/CTPP2FileSourceLoader.cpp > tmp.cpp
+    echo "#else" >> tmp.cpp
+    echo "    #include <unistd.h> /* getcwd */" >> tmp.cpp
+    tail -n +45 src/CTPP2FileSourceLoader.cpp >> tmp.cpp
+    mv tmp.cpp src/CTPP2FileSourceLoader.cpp
+    cmake .
+    make
+    sudo make install
+  fi
+  echo "CT++ installed."
+fi
+
 echo "Done."

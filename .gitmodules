@@ -1,0 +1,3 @@
+[submodule "ctemplator"]
+	path = ctemplator
+	url = git@github.com:dmitry-t/ctemplator.git
