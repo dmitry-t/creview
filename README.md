@@ -1,4 +1,4 @@
-creview
-=======
+Hints
+=====
 
-Convenient code review tool. Written in C++ (C++11). GIT integration.
+An online organizer, written in C++.
