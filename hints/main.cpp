@@ -6,9 +6,7 @@
 #include "Poco/Dynamic/Var.h"
 #include "Poco/Net/HTTPServer.h"
 #include "Poco/Util/ServerApplication.h"
-#include "contrib/poco-1.6.0/Foundation/include/Poco/Path.h"
-#include "contrib/poco-1.6.0/Foundation/include/Poco/Dynamic/VarHolder.h"
-#include "contrib/poco-1.6.0/Foundation/include/Poco/Dynamic/Struct.h"
+#include "Poco/Dynamic/Struct.h"
 
 #include <iostream>
 #include <vector>
