@@ -1,6 +1,6 @@
 #include "hints/net/url/segment.h"
 
-#include "gtest/gtest.h"
+#include <gtest/gtest.h>
 
 namespace hints {
 namespace net {
