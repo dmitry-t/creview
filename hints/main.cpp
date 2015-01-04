@@ -3,16 +3,16 @@
 #include "hints/timestamp.h"
 #include "ctemplator/Engine.h"
 
-#include "Poco/Dynamic/Var.h"
 #include "Poco/Net/HTTPServer.h"
 #include "Poco/Util/ServerApplication.h"
-#include "Poco/Dynamic/Struct.h"
 
 #include <iostream>
 #include <vector>
 #include <string>
 
 using Poco::Util::ServerApplication;
+using ctemplator::vars::Var;
+using ctemplator::vars::Object;
 
 namespace hints {
 
@@ -35,9 +35,10 @@ public:
             net::ServerRequest& request,
             net::ServerResponse& response) override
     {
-        Poco::Dynamic::Var vars = Poco::Dynamic::Struct<std::string>();
-        vars["id"] = *request.getPathParam("id");
-        vars["timestamp"] = Timestamp().epochMicroseconds();
+        Var vars = Object()
+                .set("id", *request.getPathParam("id"))
+                .set("timestamp",
+                        std::to_string(Timestamp().epochMicroseconds()));
         auto content = templator.render("templates/sample.tpl", vars);
         response.setStatus(net::HTTPStatus::HTTP_OK, "OK")
                 .setContentType("text/plain")
