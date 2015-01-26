@@ -5,5 +5,11 @@
     <string name="title_activity_main">Main</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="task_title">Название</string>
+    <string name="task_description">Описание</string>
+    <string name="task_trigger_time">Напоминание</string>
+    <string name="task_day_of_month">День месяца</string>
+    <string name="task_time_of_day">Время дня</string>
+    <string name="task_time_hour_minute_delimiter">:</string>
 
 </resources>
