@@ -1,5 +1,5 @@
 #include "hints/net/server_request_impl.h"
-#include "contrib/poco-1.6.0/Foundation/include/Poco/URI.h"
+#include "Poco/URI.h"
 
 namespace hints {
 namespace net {

@@ -1,7 +1,7 @@
 #include <memory>
 
 #include "hints/net/request_handler_registry.h"
-#include "hints/net/request_handler.h"
+#include "hints/net/RequestHandler.h"
 #include "hints/net/server_request_impl.h"
 #include "hints/net/server_response_impl.h"
 #include "url/mapper.h"

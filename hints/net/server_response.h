@@ -1,6 +1,6 @@
 #pragma once
 
-#include "hints/net/http_status.h"
+#include "hints/net/HTTPStatus.h"
 #include "hints/timespan.h"
 
 #include <string>

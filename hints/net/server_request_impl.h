@@ -1,6 +1,6 @@
 #pragma once
 
-#include "hints/net/server_request.h"
+#include "hints/net/ServerRequest.h"
 #include "hints/net/url/mapper.h"
 
 #include "Poco/Net/HTTPServerRequest.h"

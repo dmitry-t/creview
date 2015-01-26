@@ -1,6 +1,6 @@
 #pragma once
 
-#include "hints/net/request_handler.h"
+#include "hints/net/RequestHandler.h"
 #include "hints/net/request_handler_factory.h"
 #include "hints/net/url/mapper.h"
 

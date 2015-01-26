@@ -1,6 +1,6 @@
 #include "hints/scheduler/scheduler_impl.h"
 #include "Poco/Util/TimerTask.h"
-#include "contrib/poco-1.6.0/Util/include/Poco/Util/TimerTaskAdapter.h"
+#include "Poco/Util/TimerTaskAdapter.h"
 
 namespace hints {
 namespace scheduler {

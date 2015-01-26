@@ -1,5 +1,5 @@
 #include "hints/net/request_handler_registry.h"
-#include "hints/net/request_handler.h"
+#include "hints/net/RequestHandler.h"
 #include "hints/timestamp.h"
 #include "ctemplator/Engine.h"
 
