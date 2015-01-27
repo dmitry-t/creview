@@ -14,7 +14,8 @@ public class PushIntentService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        Bundle extras = intent.getExtras();
-        GoogleCloudMessaging messaging = GoogleCloudMessaging.getInstance(this);
+        final Bundle extras = intent.getExtras();
+        final GoogleCloudMessaging messaging = GoogleCloudMessaging.getInstance(this);
+        final String messageType = messaging.getMessageType(intent);
     }
 }

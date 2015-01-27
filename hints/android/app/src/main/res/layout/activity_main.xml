@@ -1,13 +1,28 @@
-<FrameLayout
-    android:id="@+id/container"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.data.hints.MainActivity"
-    tools:ignore="MergeRootFrame">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context="com.data.hints.MainActivity"
+            tools:ignore="MergeRootFrame">
 
-    <com.data.hints.view.TaskEditView
+    <LinearLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-</FrameLayout>
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/activity_main_notify_button"
+            android:text="@string/send_test_notification"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+        <com.data.hints.view.TaskEditView
+            android:id="@+id/activity_main_task_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+</ScrollView>

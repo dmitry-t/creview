@@ -1,5 +1,10 @@
 package com.data.hints.core;
 
+import com.data.hints.app.NotificationService;
+
+import java.util.Date;
+import java.util.GregorianCalendar;
+
 public class Task {
 
     private String title_;
@@ -34,5 +39,9 @@ public class Task {
 
     public TriggerTime getTriggerTime() {
         return triggerTime_;
+    }
+
+    public void perform(Date issueTime, NotificationService notificationService) {
+        notificationService.notify(title_, description_, issueTime);
     }
 }

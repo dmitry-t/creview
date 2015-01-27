@@ -11,5 +11,6 @@
     <string name="task_day_of_month">День месяца</string>
     <string name="task_time_of_day">Время дня</string>
     <string name="task_time_hour_minute_delimiter">:</string>
+    <string name="send_test_notification">Послать тестовое уведомление</string>
 
 </resources>
